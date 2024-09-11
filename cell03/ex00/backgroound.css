@@ -1,0 +1,12 @@
+body {
+    display: flex;
+ 
+    height: 100vh;     
+    margin: 0;
+}
+
+button {
+    width: 10rem;
+    height: 4rem;
+    font-size: 1.5rem;
+}
