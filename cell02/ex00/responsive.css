@@ -5,13 +5,15 @@ body, html {
 
 table {
     width: 100%;
-    
+    height: 100%;
     border-collapse: collapse;
     border: 10px solid;
     table-layout: fixed;
 }
 
 td {
+    width: 100%;
+    height: 100%;
     padding: 20px;
     border: 10px solid;
     overflow: hidden;
