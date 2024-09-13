@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Management</title>
+    <style>
+        body {
+                display: flex; 
+                justify-content: center; 
+                align-items: center; 
+                min-height: 100vh; 
+            }
+    
+            .box{
+                width: 300px;
+                background-color: #fff;
+                border-radius: 10px;
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+                text-align: center;
+                overflow: hidden;
+            }
+      </style>
+        
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+    <div class="box">
+    <button id="newTaskBtn">New</button>
+    <div id="ft_list"></div>
+</div>
+</body>
+<script src="todo.js"></script>
+</html>
