@@ -1,74 +1,73 @@
-function getCookie(name) {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop().split(';').shift();
-}
+let todoList = [];
+const ftList = document.getElementById('ft_list');
+const addBtn = document.getElementById('addBtn');
 
-// Function to save the list in cookies
-function saveToCookie() {
-    const todos = document.querySelectorAll(".todo-item");
-    const todoArray = Array.from(todos).map(todo => todo.innerText); 
-    document.cookie = `todoList=${encodeURIComponent(JSON.stringify(todoArray))}; path=/`;
-}
+const render = () => {
+  ftList.innerHTML = '';
+  todoList.forEach((task, index) => {
+    const taskDiv = document.createElement('div');
+    taskDiv.textContent = task;
+    taskDiv.style.padding = '10px';
+    taskDiv.style.margin = '5px';
+    taskDiv.style.borderRadius = '4px';
+    taskDiv.style.border = '1px solid #ddd';
+    taskDiv.style.backgroundColor = '#f9f9f9';
 
-// Function to load tasks from the cookie
-function loadFromCookie() {
-    const todoList = getCookie("todoList");
-    if (todoList) {
-        try {
-            const todos = JSON.parse(decodeURIComponent(todoList));
-            todos.forEach(createTodoElement);
-        } catch (error) {
-            console.error("Error parsing todos from cookie:", error);
-        }
+    if (index === 0) {
+      taskDiv.style.borderColor = '#4CAF50';
+      taskDiv.style.boxShadow = '0 0 5px rgba(0, 0, 0, 0.2)';
     }
-}
 
-  function loadTodosFromCookie() {
-    try {
-        let todos = localStorage.getItem('todos');
-        if (todos) {
-            todos = JSON.parse(todos);
-            todos.forEach(addTodo);
-        }
-    } catch (error) {
-        console.error("Error loading todos from local storage:", error);
-        // แสดงข้อความแจ้งผู้ใช้ หรือดำเนินการอื่นๆ ที่เหมาะสม
-    }
-}
-
-  
-  // Function to create a new TODO div element
-  function createTodoElement(todoText) {
-    const todoDiv = document.createElement("div");
-    todoDiv.classList.add("todo-item");
-    todoDiv.innerText = todoText;
-  
-    // Add click event to the todo to confirm deletion
-    todoDiv.onclick = function () {
-      const confirmDelete = confirm("Do you want to remove this TO DO?");
+    taskDiv.addEventListener('click', () => {
+      const confirmDelete = confirm('Do you want to remove this task?');
       if (confirmDelete) {
-        todoDiv.remove();
-        saveToCookie();
+        removeTask(index);
       }
-    };
-  
-    // Prepend the new todo at the top of the list
-    const ftList = document.getElementById("ft_list");
-    ftList.insertBefore(todoDiv, ftList.firstChild);
+    });
+    ftList.insertBefore(taskDiv, ftList.firstChild);
+  });
+};
+
+const addTask = (task) => {
+  todoList.unshift(task);
+  saveTasks();
+  render();
+};
+
+const removeTask = (index) => {
+  todoList.splice(index, 1);
+  saveTasks();
+  render();
+};
+
+const saveTasks = () => {
+  setCookie('todoList', JSON.stringify(todoList), 7);
+};
+
+const setCookie = (key, value, days) => {
+  const date = new Date();
+  date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+  const expires = `expires=${date.toUTCString()}`;
+  document.cookie = `${encodeURIComponent(key)}=${encodeURIComponent(value)}; ${expires}; path=/`;
+};
+
+const getCookie = (key) => {
+  const cookies = document.cookie.split(';').map(c => c.trim());
+  const cookie = cookies.find(c => c.startsWith(`${encodeURIComponent(key)}=`));
+  return cookie ? decodeURIComponent(cookie.split('=')[1]) : null;
+};
+
+window.onload = () => {
+  const savedTasks = getCookie('todoList');
+  if (savedTasks) {
+    todoList = JSON.parse(savedTasks);
+    render();
   }
-  
-  // Function to handle new TODO creation
-  function newTodo() {
-    const todoText = prompt("Enter your new TO DO:");
-    if (todoText !== null && todoText.trim() !== "") {
-      createTodoElement(todoText);
-      saveToCookie();
-    }
+};
+
+addBtn.addEventListener('click', () => {
+  const newTask = prompt('Enter new task:');
+  if (newTask && newTask.trim()) {
+    addTask(newTask);
   }
-  
-  // Load todos from cookies when the page loads
-  window.onload = function () {
-    loadFromCookie();
-  };
-      
+});
