@@ -1,0 +1,119 @@
+body {
+    background-color: #c58485;
+    color: #000000;
+    font-size: 1.6rem;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    font-size: 4.5rem;
+}
+
+h2 {
+    font-size: 2.5rem;
+}
+
+h3 {
+    font-size: 2rem;
+}
+
+nav {
+    background-color: #211311;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 100;
+}
+
+.navbar-brand {
+    color: #f5f5f5;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.nav-link {
+    color: #f5f5f5;
+    font-size: 1.8rem;
+    padding: 10px 15px;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #d4a5a5;
+}
+
+.nav-link.active {
+    color: #d4a5a5;
+}
+
+section {
+    padding: 50px 40px;
+}
+
+.img-fluid {
+    max-width: 22rem;
+    height: auto;
+    width: auto;
+}
+
+.btn {
+    padding: 15px 30px;
+    font-size: 1.5rem;
+    background-color: #2e1211;
+    color: #ffffff;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #d4a5a5;
+    color: #211311;
+}
+
+#contact {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#contact .contact-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#contact .contact-content h2 {
+    margin-bottom: 0px;
+}
+
+#contact .social-icons a {
+    border: none;
+    margin: 0 10px;
+}
+
+#contact .social-icons img {
+    width: 50px;
+    height: auto;
+    padding: 5px;
+    transition: transform 0.3s ease;
+}
+
+#contact .social-icons img:hover {
+    transform: scale(1.1);
+}
+
+#summary img {
+    width: 200px;
+    height: auto;
+    margin: 10px 0;
+}
+
+#summary p {
+    margin-top: 10px;
+    font-size: 1.2rem;
+}
+
+a {
+    text-decoration: none;
+}
